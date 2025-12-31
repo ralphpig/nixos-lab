@@ -37,7 +37,7 @@
     vim
     git
     wget
-    rg
+    ripgrep
   ];
 
   # Don't change ever

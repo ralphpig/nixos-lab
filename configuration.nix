@@ -17,6 +17,11 @@
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;
+    dates = "03:00";
+    rebootWindow = {
+      lower = "03:00";
+      upper = "05:00";
+    };
   };
 
   services.openssh.enable = true;

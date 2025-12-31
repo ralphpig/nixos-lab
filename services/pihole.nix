@@ -29,6 +29,14 @@
         url = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/pro.txt";
         description = "hagezi multi pro";
       }
+      {
+        url = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/tif.txt";
+        description = "hagezi threat intelligence";
+      }
+      {
+        url = "https://cdn.jsdelivr.net/gh/hagezi/dns-blocklists@latest/adblock/nsfw.txt";
+        description = "hagezi nsfw";
+      }
     ];
 
     settings = {

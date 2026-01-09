@@ -10,6 +10,7 @@ in
     ./services/traefik.nix
     # ./services/home-assistant.nix
     ./services/pihole.nix
+    ./services/factorio.nix
   ];
 
   _module.args.secrets = secrets;

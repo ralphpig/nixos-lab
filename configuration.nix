@@ -34,10 +34,11 @@
   users = {
     users.ralphpig = {
       isNormalUser = true;
-      extraGroups = [ "wheel" ];
+      extraGroups = [ "wheel" "factorio" ];
     };
   };
 
+  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     vim
     git

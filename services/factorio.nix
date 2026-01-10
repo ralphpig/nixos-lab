@@ -16,15 +16,15 @@ let
         }
         {
           name = "elevated-rails";
-          enabled = false;
+          enabled = true;
         }
         {
           name = "quality";
-          enabled = false;
+          enabled = true;
         }
         {
           name = "space-age";
-          enabled = false;
+          enabled = true;
         }
       ];
     }
@@ -92,7 +92,7 @@ in
     # Game Config
     extraSettingsFile = "/var/lib/factorio/config/server-settings.json";
 
-    saveName = "hotel-ralphpig";
+    saveName = "space-age-2026";
     game-name = "Piggy Wiggy";
     description = "wig that pig";
     admins = [

@@ -9,10 +9,24 @@
     ./services.nix
   ];
 
+
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
+
+  # Allow serial login
+  boot.kernelParams = [
+    "nomodeset" # No GPU. Avoid DRM/TTM kernel failure
+    "console=tty0"
+    "console=ttyS0,115200n8"
+  ];
+  services.getty.extraArgs = [
+    "--keep-baud"
+    "115200"
+    "ttyS0"
+  ];
+
 
   system.autoUpgrade = {
     enable = true;

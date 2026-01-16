@@ -10,9 +10,10 @@
     9090
   ];
 
+  # TODO: use secrets/... file instead of nix module
   systemd.services.traefik.environment = {
-    CLOUDFLARE_ZONE_API_TOKEN = secrets.cloudflare.zoneApiToken;
-    CLOUDFLARE_DNS_API_TOKEN = secrets.cloudflare.dnsApiToken;
+    CLOUDFLARE_ZONE_API_TOKEN = secrets.cloudflare.api_token;
+    CLOUDFLARE_DNS_API_TOKEN = secrets.cloudflare.api_token;
   };
 
   # If I need docker

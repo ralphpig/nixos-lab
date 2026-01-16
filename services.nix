@@ -7,10 +7,15 @@ let
 in
 {
   imports = [
+    ./services/dyndns.nix
     ./services/traefik.nix
     # ./services/home-assistant.nix
     ./services/pihole.nix
     ./services/factorio.nix
+  ];
+
+  systemd.tmpfiles.rules = [
+    "d /etc/nixos/secrets 0700 root root -"
   ];
 
   _module.args.secrets = secrets;

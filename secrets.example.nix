@@ -31,13 +31,17 @@
     route = "<route for pihole>";
     # SHA256 hash of the web UI password (pihole.toml webserver.api.pwhash)
     # I don't know how to generate this. I grabbed it from an old pihole
-    webPasswordHash = "...";
+    web_pwhash = "...";
+  };
+
+  # Dynamic DNS
+  ddns = {
+    route = "lab.example.com";
   };
 
   # For ACME DNS Challenge
   cloudflare = {
     email = "...";
-    zoneApiToken = "...";
-    dnsApiToken = "...";
+    api_token = "...";
   };
 }

@@ -40,7 +40,7 @@
     ];
 
     settings = {
-      webserver.api.pwhash = secrets.pihole.webPasswordHash;
+      webserver.api.pwhash = secrets.pihole.web_pwhash;
       dns = {
         upstreams = [
           "1.1.1.1"

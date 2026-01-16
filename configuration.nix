@@ -52,9 +52,20 @@
     };
   };
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    configure = {
+      customRC  = ''
+        set shiftwidth=2 smarttab
+        set expandtab
+        set tabstop=8 softtabstop=0
+      '';
+    };
+  };
+
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    vim
     git
     wget
     ripgrep

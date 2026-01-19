@@ -3,12 +3,16 @@
   ...
 }:
 
+let
+  cfg = import ./env.nix;
+in
 {
+  _module.args.cfg = cfg;
+
   imports = [
     ./hardware-configuration.nix
     ./services.nix
   ];
-
 
   boot.loader = {
     systemd-boot.enable = true;
@@ -27,7 +31,6 @@
     "ttyS0"
   ];
 
-
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;
@@ -38,7 +41,10 @@
     };
   };
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.PermitRootLogin = "prohibit-password";
+  };
   networking = {
     hostName = "nixos-lab";
     networkmanager.enable = true;
@@ -46,17 +52,27 @@
 
   time.timeZone = "America/New_York";
   users = {
-    users.ralphpig = {
+    users.root = {
+      openssh.authorizedKeys.keys = cfg.root_user.ssh_public_keys;
+    };
+
+    users."${cfg.user.name}" = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "factorio" ];
+      openssh.authorizedKeys.keys = cfg.user.ssh_public_keys;
+      extraGroups = [
+        "wheel"
+        "factorio"
+      ];
     };
   };
 
   programs.neovim = {
     enable = true;
+    vimAlias = true;
+    viAlias = true;
     defaultEditor = true;
     configure = {
-      customRC  = ''
+      customRC = ''
         set shiftwidth=2 smarttab
         set expandtab
         set tabstop=8 softtabstop=0

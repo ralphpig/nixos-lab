@@ -34,6 +34,11 @@
     web_pwhash = "...";
   };
 
+  cloud_proxy = {
+    ip = "10.0.0.2"; # wg interface ip to the proxy, or WAN
+    a = "<route for cloud proxy>";
+  };
+
   # Dynamic DNS
   ddns = {
     route = "lab.example.com";
@@ -42,6 +47,20 @@
   # For ACME DNS Challenge
   cloudflare = {
     email = "...";
+    # TODO: replace with credential files
     api_token = "...";
+  };
+
+  root_user = {
+    ssh_public_keys = [
+      "ssh-ed25519 ..."
+    ];
+  };
+
+  user = {
+    name = "ralphpig";
+    ssh_public_keys = [
+      "ssh-ed25519 ..."
+    ];
   };
 }

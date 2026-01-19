@@ -1,5 +1,5 @@
 {
-  secrets ? { },
+  cfg,
   ...
 }:
 
@@ -12,8 +12,8 @@
 
   # TODO: use secrets/... file instead of nix module
   systemd.services.traefik.environment = {
-    CLOUDFLARE_ZONE_API_TOKEN = secrets.cloudflare.api_token;
-    CLOUDFLARE_DNS_API_TOKEN = secrets.cloudflare.api_token;
+    CLOUDFLARE_ZONE_API_TOKEN = cfg.cloudflare.api_token;
+    CLOUDFLARE_DNS_API_TOKEN = cfg.cloudflare.api_token;
   };
 
   # If I need docker
@@ -37,7 +37,7 @@
 
       certificatesResolvers = {
         cloudflare.acme = {
-          email = secrets.cloudflare.email;
+          email = cfg.cloudflare.email;
           dnsChallenge = {
             provider = "cloudflare";
             propagation.delayBeforeChecks = 900; # 15 min to ensure propagation
@@ -72,7 +72,7 @@
 
       # Traefik
       http.routers.traefik = {
-        rule = "Host(`${secrets.traefik.route}`)";
+        rule = "Host(`${cfg.traefik.route}`)";
         entryPoints = [ "websecure" ];
         service = "api@internal";
         middlewares = [ "https_redirect" ];
@@ -83,7 +83,7 @@
 
       # Home Assistant
       http.routers.home_assistant = {
-        rule = "Host(`${secrets.home_assistant.route}`)";
+        rule = "Host(`${cfg.home_assistant.route}`)";
         entryPoints = [ "websecure" ];
         service = "home_assistant";
         middlewares = [ "https_redirect" ];
@@ -101,7 +101,7 @@
 
       # Pihole
       http.routers.pihole = {
-        rule = "Host(`${secrets.pihole.route}`)";
+        rule = "Host(`${cfg.pihole.route}`)";
         entryPoints = [ "websecure" ];
         service = "pihole";
         middlewares = [ "https_redirect" ];
@@ -119,7 +119,7 @@
 
       # Truenas Proxy
       http.routers.proxy_truenas = {
-        rule = "Host(`${secrets.nas.route}`)";
+        rule = "Host(`${cfg.nas.route}`)";
         service = "proxy_truenas";
         entryPoints = [ "websecure" ];
         middlewares = [ "https_redirect" ];
@@ -130,14 +130,14 @@
       http.services.proxy_truenas = {
         loadBalancer = {
           servers = [
-            { url = "http://${secrets.nas.ip}:81"; }
+            { url = "http://${cfg.nas.ip}:81"; }
           ];
         };
       };
 
       # Unifi Proxy
       http.routers.proxy_unifi = {
-        rule = "Host(`${secrets.unifi.route}`)";
+        rule = "Host(`${cfg.unifi.route}`)";
         service = "proxy_unifi";
         entryPoints = [ "websecure" ];
         middlewares = [ "https_redirect" ];
@@ -149,7 +149,7 @@
         loadBalancer = {
           serversTransport = "skip_tls_transport";
           servers = [
-            { url = "https://${secrets.unifi.ip}"; }
+            { url = "https://${cfg.unifi.ip}"; }
           ];
         };
       };

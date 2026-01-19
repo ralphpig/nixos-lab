@@ -2,9 +2,6 @@
   ...
 }:
 
-let
-  secrets = if builtins.pathExists ./secrets.nix then import ./secrets.nix else { };
-in
 {
   imports = [
     ./services/dyndns.nix
@@ -15,10 +12,8 @@ in
   ];
 
   systemd.tmpfiles.rules = [
-    "d /etc/nixos/secrets 0700 root root -"
+    "d /etc/credentials 0700 root root -"
   ];
-
-  _module.args.secrets = secrets;
 
   boot.supportedFilesystems = [ "nfs" ];
   services.rpcbind.enable = true;

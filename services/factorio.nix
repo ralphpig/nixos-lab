@@ -2,11 +2,11 @@
   lib,
   pkgs,
   config,
-  secrets ? { },
+  cfg,
   ...
 }:
 
-let 
+let
   mod-list-json = pkgs.writeText "mod-list.json" (
     builtins.toJSON {
       mods = [
@@ -59,11 +59,11 @@ in
       #
       #####
 
-      # Disable the automated "special" directory setup. 
-      StateDirectory = lib.mkForce ""; 
+      # Disable the automated "special" directory setup.
+      StateDirectory = lib.mkForce "";
 
       # 2. Point the service to your NFS mount manually
-      WorkingDirectory = "/var/lib/factorio"; 
+      WorkingDirectory = "/var/lib/factorio";
 
       # 3. Relax sandboxing that conflicts with NFS namespaces
       # ProtectSystem = "full";
@@ -73,7 +73,7 @@ in
   };
 
   fileSystems."/var/lib/factorio" = {
-    device = "${secrets.nas.ip}:/mnt/core/game/factorio";
+    device = "${cfg.nas.ip}:/mnt/core/game/factorio";
     fsType = "nfs";
     options = [
       "nfsvers=3"
@@ -83,12 +83,11 @@ in
     ];
   };
 
-
   services.factorio = {
     enable = true;
     stateDirName = "factorio"; # dir in /var/lib; this is the default
     openFirewall = true;
-    
+
     # Game Config
     extraSettingsFile = "/var/lib/factorio/config/server-settings.json";
 

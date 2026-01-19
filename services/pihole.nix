@@ -1,5 +1,5 @@
 {
-  secrets ? { },
+  cfg,
   ...
 }:
 
@@ -40,22 +40,23 @@
     ];
 
     settings = {
-      webserver.api.pwhash = secrets.pihole.web_pwhash;
+      webserver.api.pwhash = cfg.pihole.web_pwhash;
       dns = {
         upstreams = [
           "1.1.1.1"
           "1.0.0.1"
         ];
         hosts = [
-          "${secrets.lab.ip} ${secrets.lab.a}"
-          "${secrets.nas.ip} ${secrets.nas.a}"
+          "${cfg.lab.ip} ${cfg.lab.a}"
+          "${cfg.nas.ip} ${cfg.nas.a}"
+          "${cfg.cloud_proxy.ip} ${cfg.cloud_proxy.a}"
         ];
         cnameRecords = [
-          "${secrets.nas.route},${secrets.lab.a}"
-          "${secrets.traefik.route},${secrets.lab.a}"
-          "${secrets.unifi.route},${secrets.lab.a}"
-          "${secrets.pihole.route},${secrets.lab.a}"
-          "${secrets.home_assistant.route},${secrets.lab.a}"
+          "${cfg.nas.route},${cfg.lab.a}"
+          "${cfg.traefik.route},${cfg.lab.a}"
+          "${cfg.unifi.route},${cfg.lab.a}"
+          "${cfg.pihole.route},${cfg.lab.a}"
+          "${cfg.home_assistant.route},${cfg.lab.a}"
         ];
       };
     };
@@ -63,7 +64,7 @@
 
   services.pihole-web = {
     enable = true;
-    hostName = secrets.pihole.route;
+    hostName = cfg.pihole.route;
     ports = [ 9000 ];
   };
 }

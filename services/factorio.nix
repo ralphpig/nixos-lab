@@ -7,6 +7,10 @@
 }:
 
 let
+  unstable = import <nixpkgs-unstable> {
+    config = config.nixpkgs.config;
+  };
+
   mod-list-json = pkgs.writeText "mod-list.json" (
     builtins.toJSON {
       mods = [
@@ -85,6 +89,8 @@ in
 
   services.factorio = {
     enable = true;
+    package = unstable.factorio-headless;
+
     stateDirName = "factorio"; # dir in /var/lib; this is the default
     openFirewall = true;
 

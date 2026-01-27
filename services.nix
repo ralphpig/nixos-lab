@@ -9,6 +9,7 @@
     # ./services/home-assistant.nix
     ./services/pihole.nix
     ./services/factorio.nix
+    ./services/n8n.nix
   ];
 
   systemd.tmpfiles.rules = [

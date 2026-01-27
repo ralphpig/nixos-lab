@@ -57,6 +57,7 @@
           "${cfg.unifi.route},${cfg.lab.a}"
           "${cfg.pihole.route},${cfg.lab.a}"
           "${cfg.home_assistant.route},${cfg.lab.a}"
+          "${cfg.n8n.route},${cfg.lab.a}"
         ];
       };
     };

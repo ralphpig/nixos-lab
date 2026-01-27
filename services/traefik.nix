@@ -117,6 +117,24 @@
         };
       };
 
+      # n8n
+      http.routers.n8n = {
+        rule = "Host(`${cfg.n8n.route}`)";
+        entryPoints = [ "websecure" ];
+        service = "n8n";
+        middlewares = [ "https_redirect" ];
+        tls = {
+          certResolver = "cloudflare";
+        };
+      };
+      http.services.n8n = {
+        loadBalancer = {
+          servers = [
+            { url = "http://127.0.0.1:5678"; }
+          ];
+        };
+      };
+
       # Truenas Proxy
       http.routers.proxy_truenas = {
         rule = "Host(`${cfg.nas.route}`)";

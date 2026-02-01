@@ -5,38 +5,42 @@
   nas = {
     ip = "<ip of nas>";
     a = "<DNS for nas>"; # A record for NAS
-    route = "<route for truenas>"; # Traefik route for NAS management
+    route = "truenas.home.lab"; # Traefik route for NAS management
   };
 
   lab = {
     ip = "<ip of lab>";
     a = "hub.ralphpig.dev";
-    route = "<route for hub>";
+    route = "hub.home.lab";
   };
 
   unifi = {
     ip = "<ip of unifi / router>";
-    route = "<route for unifi>";
+    route = "unifi.home.lab";
   };
 
   traefik = {
-    route = "<route for traefik>";
+    route = "traefik.home.lab";
   };
 
   home_assistant = {
-    route = "<route for home>";
+    route = "home.home.lab";
   };
 
   pihole = {
-    route = "<route for pihole>";
+    route = "pihole.home.lab";
     # SHA256 hash of the web UI password (pihole.toml webserver.api.pwhash)
     # I don't know how to generate this. I grabbed it from an old pihole
     web_pwhash = "...";
   };
 
+  n8n = {
+    route = "n8n.home.lab";
+  };
+
   cloud_proxy = {
     ip = "10.0.0.2"; # wg interface ip to the proxy, or WAN
-    a = "<route for cloud proxy>";
+    a = "proxy.home.lab";
   };
 
   # Dynamic DNS

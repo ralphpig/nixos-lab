@@ -62,6 +62,7 @@ in
       extraGroups = [
         "wheel"
         "factorio"
+        "minecraft"
       ];
     };
   };

@@ -22,7 +22,7 @@
     group = "pihole";
 
     openFirewallDNS = true;
-    openFirewallWebserver = true;
+    # openFirewallWebserver = true;
 
     lists = [
       {

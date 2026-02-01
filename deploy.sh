@@ -11,6 +11,12 @@ rsync -rv \
   --rsync-path="sudo rsync" \
   ./secrets/ ${NIXOS_HOST}:/etc/credentials/;
 
+rsync -rv \
+  --delete \
+  --exclude './secrets/' \
+  --rsync-path="sudo rsync" \
+  ./ ${NIXOS_HOST}:/etc/nixos/;
+
 nixos-rebuild \
   --target-host ${NIXOS_HOST} \
   --build-host ${NIXOS_HOST} \

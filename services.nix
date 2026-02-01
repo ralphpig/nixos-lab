@@ -6,9 +6,10 @@
   imports = [
     ./services/dyndns.nix
     ./services/traefik.nix
-    # ./services/home-assistant.nix
+    ./services/n8n.nix
     ./services/pihole.nix
     ./services/factorio.nix
+    ./services/minecraft.nix
     ./services/n8n.nix
   ];
 

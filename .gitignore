@@ -1,3 +1,4 @@
 secrets/
 env.nix
 hardware-configuration.nix
+deploy.env.sh

@@ -42,6 +42,9 @@
     settings = {
       webserver.api.pwhash = cfg.pihole.web_pwhash;
       dns = {
+        # Allow non-local networks to hit 53; like VPN clients
+        listeningMode = "ALL";
+
         upstreams = [
           "1.1.1.1"
           "1.0.0.1"

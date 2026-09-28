@@ -41,7 +41,7 @@ in
   };
 
   services.minecraft-server = {
-    enable = true;
+    enable = false;
     eula = true;
     package = unstable.minecraft-server;
     dataDir = dataDir;

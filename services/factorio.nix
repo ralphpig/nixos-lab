@@ -88,7 +88,7 @@ in
   };
 
   services.factorio = {
-    enable = true;
+    enable = false;
     package = unstable.factorio-headless;
 
     stateDirName = "factorio"; # dir in /var/lib; this is the default

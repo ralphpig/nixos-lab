@@ -61,6 +61,8 @@
           "${cfg.pihole.route},${cfg.lab.a}"
           "${cfg.home_assistant.route},${cfg.lab.a}"
           "${cfg.n8n.route},${cfg.lab.a}"
+          "${cfg.photo_gallery.route},${cfg.lab.a}"
+          "${cfg.photo_gallery_cdn.route},${cfg.lab.a}"
         ];
       };
     };

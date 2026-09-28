@@ -7,10 +7,14 @@
     "z /etc/credentials/cloudflare-api-token 0400 root root -"
   ];
 
-  systemd.services.ddclient.serviceConfig = {
-    LoadCredential = [
-      "cloudflare_token:/etc/credentials/cloudflare-api-token"
-    ];
+  systemd.services.ddclient = {
+    after = [ "nss-user-lookup.target" ];
+    wants = [ "nss-user-lookup.target" ];
+    serviceConfig = {
+      LoadCredential = [
+        "cloudflare_token:/etc/credentials/cloudflare-api-token"
+      ];
+    };
   };
 
   services.ddclient = {

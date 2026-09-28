@@ -171,6 +171,75 @@
           ];
         };
       };
+
+      # Photo Gallery
+      http.middlewares.obj-strip.stripPrefix.prefixes = [ "/obj" ];
+      http.routers = {
+        photo_gallery__api = {
+          rule = "Host(`${cfg.photo_gallery.route}`) && PathPrefix(`/api`)";
+          priority = 30;
+          service = "photo_gallery__api";
+          entryPoints = [ "websecure" ];
+          middlewares = [ "https_redirect" ];
+          tls = {
+            certResolver = "cloudflare";
+          };
+        };
+        photo_gallery__obj = {
+          rule = "Host(`${cfg.photo_gallery.route}`) && PathPrefix(`/obj`)";
+          priority = 20;
+          service = "photo_gallery__obj";
+          entryPoints = [ "websecure" ];
+          middlewares = [
+            "https_redirect"
+            "obj-strip"
+          ];
+          tls = {
+            certResolver = "cloudflare";
+          };
+        };
+        photo_gallery__web = {
+          rule = "Host(`${cfg.photo_gallery.route}`)";
+          priority = 1;
+          service = "photo_gallery__web";
+          entryPoints = [ "websecure" ];
+          middlewares = [ "https_redirect" ];
+          tls = {
+            certResolver = "cloudflare";
+          };
+        };
+        photo_gallery__obj_mgmt = {
+          rule = "Host(`${cfg.photo_gallery_cdn.route}`)";
+          service = "photo_gallery__obj_mgmt";
+          entryPoints = [ "websecure" ];
+          middlewares = [ "https_redirect" ];
+          tls = {
+            certResolver = "cloudflare";
+          };
+        };
+      };
+      http.services = {
+        photo_gallery__web = {
+          loadBalancer = {
+            servers = [ { url = "http://127.0.0.1:8100"; } ];
+          };
+        };
+        photo_gallery__api = {
+          loadBalancer = {
+            servers = [ { url = "http://127.0.0.1:8101"; } ];
+          };
+        };
+        photo_gallery__obj = {
+          loadBalancer = {
+            servers = [ { url = "http://127.0.0.1:8102"; } ];
+          };
+        };
+        photo_gallery__obj_mgmt = {
+          loadBalancer = {
+            servers = [ { url = "http://127.0.0.1:8103"; } ];
+          };
+        };
+      };
     };
   };
 

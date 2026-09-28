@@ -61,6 +61,7 @@ in
       openssh.authorizedKeys.keys = cfg.user.ssh_public_keys;
       extraGroups = [
         "wheel"
+        "docker"
         "factorio"
         "minecraft"
       ];
